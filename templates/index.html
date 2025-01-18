@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .chat-container { width: 50%; margin: 0 auto; }
+        .messages { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; }
+        .input-container { margin-top: 10px; }
+        .input-container input { width: 80%; padding: 10px; }
+        .input-container button { padding: 10px; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="messages" id="messages"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Ask something...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            const messagesDiv = document.getElementById('messages');
+            
+            // Append user's message to chat window
+            const userMessage = document.createElement('div');
+            userMessage.textContent = `You: ${userInput}`;
+            messagesDiv.appendChild(userMessage);
+            
+            // Clear the input field
+            document.getElementById('user-input').value = '';
+            
+            // Send the message to the backend
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Append chatbot's response to chat window
+                const botMessage = document.createElement('div');
+                botMessage.textContent = `Bot: ${data.response}`;
+                messagesDiv.appendChild(botMessage);
+                
+                // Scroll to the bottom of the chat window
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
