@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In the Pink</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background-color: #CE063F;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .menu-button {
+            background-color: #CE063F;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .menu-button:hover {
+            background-color: #A80532;
+        }
+
+        .menu-link {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>In the Pink</h1>
+    </header>
+    
+    <div class="main-container">
+        <div class="button-container">
+            <a href="/chat" class="menu-link">
+                <button class="menu-button">Health Chat</button>
+            </a>
+            <a href="/nutrition" class="menu-link">
+                <button class="menu-button">Nutrition Calculator</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
